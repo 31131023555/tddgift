@@ -6,7 +6,7 @@ class Article < ApplicationRecord
 
 
   def is_published
-    return self.created_at < DateTime.now
+    return self.publishing < DateTime.now
   end
 
   def publish

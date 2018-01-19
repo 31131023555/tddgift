@@ -4,10 +4,10 @@ RSpec.describe Article, type: :model do
 
   before do
     @a1 = create(:article)
-    @t1 = create(:text, article_id: 27)
-    @t2 = create(:text, textorder: 1, article_id: 27)
-    @i1 = create(:image, article_id: 27)
-    @i2 = create(:image, imgorder: 1, article_id: 27)
+    @t1 = create(:text)
+    @t2 = create(:text, textorder: 1)
+    @i1 = create(:image)
+    @i2 = create(:image, imgorder: 1)
   end
 
   it { should validate_presence_of(:title) }
