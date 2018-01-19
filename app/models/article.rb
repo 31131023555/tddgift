@@ -22,7 +22,7 @@ class Article < ApplicationRecord
   end
 
   def show_info
-    self.texts.order(:textorder) + self.images.order(:imgorder)
+    self.texts + self.images
   end
 
 end

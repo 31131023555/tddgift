@@ -5,4 +5,12 @@ class Image < ApplicationRecord
   validates :imglikes, presence: true
 
   default_scope { order(imgorder: :desc) }
+
+  def increase_like
+    self.imglikes.next
+  end
+
+  def show_like
+    self.imglikes
+  end
 end
