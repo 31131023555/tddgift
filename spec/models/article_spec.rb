@@ -1,46 +1,38 @@
 require 'rails_helper'
 
 RSpec.describe Article, type: :model do
-  context 'validations' do
-    it { should validate_presence_of(:title) }
-    it { should validate_presence_of(:likes) }
 
-    it 'Article was published' do
-      article = Article.new(title: 'IsPublish', likes: 20)
-      article.save
-      expect(article.is_published).to eq true
-    end
+  before do
+    @a1 = create(:article)
+    @t1 = create(:text, article_id: 27)
+    @t2 = create(:text, textorder: 1, article_id: 27)
+    @i1 = create(:image, article_id: 27)
+    @i2 = create(:image, imgorder: 1, article_id: 27)
+  end
 
-    it 'Finishing publishing status' do
-      article = Article.new(title: 'Publish', likes: 25)
-      article.save
-      expect(article.publish).to eq article.to_s
-    end
+  it { should validate_presence_of(:title) }
+  it { should validate_presence_of(:likes) }
 
-    it 'Increase number of like' do
-      article = Article.new(title: 'Increment', likes: 27)
-      article.save
-      expect(article.increase_like).to eq 28
-    end
+  it { should have_many(:texts) }
 
-    it 'Return number of like now' do
-      article = Article.new(title: 'NumOfLikes', likes: 30)
-      article.save
-      expect(article.show_likes).to eq 30
-    end
+  it 'Article was published' do
+    expect(@a1.is_published).to eq true
+  end
+
+  it 'Finishing publishing status' do
+    expect(@a1.publish).to eq @a1.to_s
+  end
+
+  it 'Increase number of like' do
+    expect(@a1.increase_like).to eq 101
+  end
+
+  it 'Return number of like now' do
+    expect(@a1.show_likes).to eq 100
   end
 
   it 'Show text and images in order' do
-    article = Article.new(title: 'NumOfLikes', likes: 30)
-    article.save
-    text1 = Text.new(headline: 'text1', textorder: 2, passage: 'sdfcvsfdsd', textlikes: 10, article_id: 1)
-    text1.save
-    text2 = Text.new(headline: 'text2', textorder: 1, passage: '1698dcxzc', textlikes: 22, article_id: 1)
-    text2.save
-    img1 = Image.new(headline: 'img2', imgorder: 3, url: '1698dadscxzc', imglikes: 12, article_id: 1)
-    img1.save
-    expect(article.show_info).to eq [text2, text1, img1]
+    expect(@a1.show_info).to eq [@t2, @t1, @i2, @i1]
   end
 
-  it { should have_many(:texts) }
 end
