@@ -6,11 +6,7 @@ class Article < ApplicationRecord
 
 
   def is_published
-    return self.publishing < DateTime.now
-  end
-
-  def publish
-    self.to_s
+    self.publishing < DateTime.now
   end
 
   def increase_like

@@ -19,10 +19,6 @@ RSpec.describe Article, type: :model do
     expect(@a1.is_published).to eq true
   end
 
-  it 'Finishing publishing status' do
-    expect(@a1.publish).to eq @a1.to_s
-  end
-
   it 'Increase number of like' do
     expect(@a1.increase_like).to eq 101
   end
