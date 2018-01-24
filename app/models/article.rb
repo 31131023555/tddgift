@@ -10,15 +10,7 @@ class Article < ApplicationRecord
   end
 
   def increase_like
-    self.likes.next
-  end
-
-  def show_likes
-    self.likes
-  end
-
-  def show_info
-    self.texts + self.images
+    self.likes += 1
   end
 
 end
