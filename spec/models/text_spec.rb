@@ -7,9 +7,6 @@ RSpec.describe Text, type: :model do
   context 'Test validations' do
     it { should validate_presence_of(:headline) }
     it { should validate_presence_of(:ordering) }
-    it 'Test likes default' do
-      expect(text.likes.is_a?(Integer)).to eq true
-    end
   end
 
   context 'Test associations' do

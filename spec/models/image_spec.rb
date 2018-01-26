@@ -7,9 +7,13 @@ RSpec.describe Image, type: :model do
   context 'Test validations' do
     it { should validate_presence_of(:headline) }
     it { should validate_presence_of(:ordering) }
-    it 'Test likes default' do
-      expect(image.likes.is_a?(Integer)).to eq true
-    end
+    it { should have_attached_file(:url) }
+    it { should validate_attachment_presence(:url) }
+    it { should validate_attachment_content_type(:url).
+        allowing('image/png', 'image/gif').
+        rejecting('text/plain', 'text/xml') }
+    it { should validate_attachment_size(:url).
+        less_than(2.megabytes) }
   end
 
   context 'Test associations' do
@@ -22,7 +26,6 @@ RSpec.describe Image, type: :model do
       image.increase_like
       expect(image.likes).to eq (before_increase_like + 1)
     end
-
   end
 
 end

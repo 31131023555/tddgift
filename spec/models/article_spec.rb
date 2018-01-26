@@ -11,13 +11,11 @@ RSpec.describe Article, type: :model do
   context 'Test validations' do
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:publishing) }
-    it 'Test likes default' do
-      expect(article.likes.is_a?(Integer)).to eq true
-    end
   end
 
   context 'Test associations' do
     it { should have_many(:texts) }
+    it { should have_many(:images) }
   end
 
   context 'Test methods' do
